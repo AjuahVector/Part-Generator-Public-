@@ -1,0 +1,84 @@
+local Folder = Instance.new("Folder")
+Folder.Name = "GeneratedCylinders"
+Folder.Parent = workspace
+
+local function GeneratePosition()
+	local x = math.random(0, 150)
+	local y = math.random(0, 150)
+	local z = math.random(0, 150)
+	
+	return Vector3.new(x, y, z)
+end
+
+local function GenerateSize()
+	local x = math.random(0, 50)
+	local y = math.random(0, 50)
+	local z = math.random(0, 50)
+
+	return Vector3.new(x, y, z)
+end
+
+local function GenerateColor()
+	local R = math.random(0, 255)
+	local G = math.random(0, 255)
+	local B = math.random(0, 255)
+	
+	return Color3.fromRGB(R, G, B)
+end
+
+local function GenerateName()
+	local name = ""
+	local nameroll = math.random(1, 2)
+	if nameroll == 1 then
+		for i = 1, 10 do
+			name = name .. string.char(math.random(0, 122))
+		end
+	elseif nameroll == 2 then
+		local nameroll = math.random(1, 5)
+		if nameroll == 1 then
+			name = "Vectorvarious"
+		elseif nameroll == 2 then
+			name = "Set 4 Torve"
+		elseif nameroll == 3 then
+			name = "Pedro Jose"
+		elseif nameroll == 4 then
+			name = "Ajuahjamesomes"
+		elseif nameroll == 5 then
+			name = "Jaimi Boy"
+		end
+	end
+	return name
+end
+
+local function GenerateShape()
+	local shaperoll = math.random(1, 5)
+	if shaperoll == 1 then
+		return Enum.PartType.Block
+	elseif shaperoll == 2 then
+		return Enum.PartType.Ball
+	elseif shaperoll == 3 then
+		return Enum.PartType.Wedge
+	elseif shaperoll == 4 then
+		return Enum.PartType.CornerWedge
+	elseif shaperoll == 5 then
+		return Enum.PartType.Cylinder
+	end
+end
+
+local function CreateCylinder()
+	local Cylinder = Instance.new("Part")
+	Cylinder.Shape = GenerateShape()
+	Cylinder.Position = GeneratePosition()
+	Cylinder.Size = GenerateSize()
+	Cylinder.Color = GenerateColor()
+	Cylinder.CanCollide = true
+	Cylinder.Name = GenerateName()
+	Cylinder.Parent = Folder
+end
+
+task.wait(2)
+
+while true do
+	task.wait(0.05)
+	CreateCylinder()
+end
